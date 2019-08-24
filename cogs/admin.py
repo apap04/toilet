@@ -8,7 +8,7 @@ class Admin(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
       
-    #@bot.command()
+    #@client.command()
     #@commands.has_permissions(kick_members=True)
     #async def kick(ctx, member: discord.Member, *, reason=None):
         #"""Kicks a member"""
