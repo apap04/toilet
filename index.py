@@ -14,7 +14,7 @@ quotes = ["reee", "ready to flush owo", "poop", "poop funny!", "OwO what's this?
 
 logging.basicConfig(level=logging.INFO)
 client = discord.Client()
-bot = commands.Bot(command_prefix="poop ", description="the bathroom utility (toilet paper not included)", owner_id="138056116880932864", dm_help=True)
+bot = commands.Bot(command_prefix="poop ", description="the bathroom utility (toilet paper not included)", owner_id="138056116880932864")
 
 @bot.event
 async def on_ready():
@@ -23,14 +23,14 @@ async def on_ready():
 #region
 @bot.event
 async def on_command_error(ctx, error):
+    if isinstance(error, commands.CommandError):
+        pass
     if isinstance(error, commands.CheckFailure):
-        await ctx.send("Check failed. You probably can't use this command, for whatever reason.")
-    elif isinstance(error, commands.CommandError):
-        print(error)
-    if isinstance(error, commands.MissingPermissions):
-        await ctx.send("You don't have the permissions to run this command..")
+        await ctx.send("You can't use this command.")
     if isinstance(error, commands.MissingRequiredArgument):
         await ctx.send("You're missing an argument.")
+    if isinstance(error, commands.BotMissingPermissions):
+        await ctx.send("I'm missing permissions. Nice job.")
 #endregion
 
 def am_me(ctx):
@@ -71,4 +71,4 @@ for filename in os.listdir('./cogs'):
         bot.load_extension(f'cogs.{filename[:-3]}')
 
 
-bot.run(os.environ['TOKEN'])
+bot.run('NjE0MTQzODUwODQ3NTM1MTE0.XWGT1g.DHolEt_OOryfzf_uI9UaiiDpaI4')
