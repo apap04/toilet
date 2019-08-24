@@ -60,7 +60,7 @@ async def r(ctx, extension):
     print("Reloaded "+ f'{extension}')
 #endregion
 
-@client.command()
+@bot.command()
 @commands.has_permissions(manage_messages=True)
 async def purge(ctx, amount: int):
     """Clears a specific amount of messages"""
