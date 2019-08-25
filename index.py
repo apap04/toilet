@@ -14,7 +14,7 @@ quotes = ["reee", "ready to flush owo", "poop", "poop funny!", "OwO what's this?
 
 logging.basicConfig(level=logging.INFO)
 client = discord.Client()
-bot = commands.Bot(command_prefix="poop ", description="the bathroom utility (toilet paper not included)", owner_id="138056116880932864")
+bot = commands.Bot(command_prefix="pp ", description="the bathroom utility (toilet paper not included)", owner_id="138056116880932864")
 
 @bot.event
 async def on_ready():
@@ -24,7 +24,7 @@ async def on_ready():
 @bot.event
 async def on_command_error(ctx, error):
     if isinstance(error, commands.CommandError):
-        pass
+        print(error)
     if isinstance(error, commands.CheckFailure):
         await ctx.send("You can't use this command.")
     if isinstance(error, commands.MissingRequiredArgument):
@@ -71,4 +71,4 @@ for filename in os.listdir('./cogs'):
         bot.load_extension(f'cogs.{filename[:-3]}')
 
 
-bot.run(os.environ['TOKEN'])
+bot.run('NjE0MTQzODUwODQ3NTM1MTE0.XWK9Sg.1nQpyi0nu1gcFc9kz-j9IIqrjV0')

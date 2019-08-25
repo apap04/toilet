@@ -1,18 +1,15 @@
 import discord
 from discord.ext import commands
 
-client = commands.Bot(command_prefix=None)
-bot = discord.Client()
-
 class Admin(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
       
-    #@client.command()
-    #@commands.has_permissions(kick_members=True)
-    #async def kick(ctx, member: discord.Member, *, reason=None):
-        #"""Kicks a member"""
-        #await member.kick("{} has been kicked. " + f'{reason}')
+    @commands.command()
+    @commands.has_permissions(kick_members=True)
+    async def kick(ctx, member: discord.Member, *, reason=None):
+        """Kicks a member"""
+        await member.kick("{} has been kicked. " + f'{reason}'.format(member))
 
 def setup(bot):
     bot.add_cog(Admin(bot))
