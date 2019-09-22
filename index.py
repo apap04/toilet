@@ -66,6 +66,12 @@ async def purge(ctx, amount: int):
     """Clears a specific amount of messages"""
     await ctx.channel.purge(limit=amount)
 
+@commands.command()
+@commands.has_permissions(kick_members=True)
+async def kick(ctx, member: discord.Member, *, reason=None):
+    """Kicks a member"""
+    await member.kick("{} has been kicked. " + f'{reason}'.format(member))
+
 for filename in os.listdir('./cogs'):
     if filename.endswith('.py'):
         bot.load_extension(f'cogs.{filename[:-3]}')
