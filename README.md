@@ -1,3 +1,5 @@
 # Toilet
 
-Please don't use this branch. Go to [run/triple-toilet](https://gitlab.com/toilet/toilet)
+Real repo: [run/triple-toilet](https://gitlab.com/toilet/toilet)
+
+The manually maintained mirror repo of the toilet bot!
