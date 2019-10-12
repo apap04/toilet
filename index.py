@@ -49,6 +49,7 @@ async def on_command_error(ctx, error):
 def am_me(ctx):
     return ctx.author.id == 138056116880932864
 
+#utility commands, owner only
 #region
 @bot.command(hidden=True)
 @commands.check(am_me)
@@ -79,11 +80,17 @@ async def purge(ctx, amount: int):
     """Clears a specific amount of messages"""
     await ctx.channel.purge(limit=amount)
 
-@commands.command()
+@bot.command()
 @commands.has_permissions(kick_members=True)
 async def kick(ctx, member: discord.Member, *, reason=None):
     """Kicks a member"""
-    await member.kick("{} has been kicked. " + f'{reason}'.format(member))
+    await member.kick("{} has been kicked. ")
+
+@bot.command()
+@commands.check(am_me)
+async def sudo(ctx):
+    """ok"""
+    await ctx.channel.send("ok")
 
 for filename in os.listdir('./cogs'):
     if filename.endswith('.py'):
