@@ -26,7 +26,7 @@ quotes = ["reee", "ready to flush owo", "poop", "poop funny!", "OwO what's this?
 
 logging.basicConfig(level=logging.INFO)
 client = discord.Client()
-bot = commands.Bot(command_prefix="pp2 ", description="the bathroom utility (toilet paper not included)", owner_id="138056116880932864")
+bot = commands.Bot(command_prefix="pp ", description="the bathroom utility (toilet paper not included)", owner_id="138056116880932864")
 game = discord.Game("pp(2) help | toilet.apap04.com")
 
 @bot.event
@@ -97,4 +97,4 @@ for filename in os.listdir('./cogs'):
         bot.load_extension(f'cogs.{filename[:-3]}')
 
 
-bot.run('NjE0MTQzODUwODQ3NTM1MTE0.XaFo6Q.mC4EgI7CpI9ymDqGYK351IiG5b8')
+bot.run(os.environ['TOKEN'])
