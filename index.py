@@ -39,7 +39,6 @@ bot = commands.Bot(command_prefix='pp', description="the bathroom utility (toile
                    owner_id="138056116880932864")
 game = discord.Game("pp(2) help | toilet.apap04.com")
 
-
 @bot.event
 async def on_ready():
     print("\n" + random.choice(quotes) + "\n")
@@ -56,13 +55,10 @@ async def on_command_error(ctx, error):
         await ctx.send("You're missing an argument.")
     if isinstance(error, commands.BotMissingPermissions):
         await ctx.send("I'm missing permissions. Nice job.")
-
-
 # endregion
 
 def am_me(ctx):
     return ctx.author.id == 138056116880932864
-
 
 # utility commands, owner only
 # region
@@ -73,14 +69,12 @@ async def l(ctx, extension):
     bot.load_extension(f'cogs.{extension}')
     print("Loaded " + f'{extension}')
 
-
 @bot.command(hidden=True)
 @commands.check(am_me)
 async def u(ctx, extension):
     """Unloads a command"""
     bot.unload_extension(f'cogs.{extension}')
     print("Unloaded " + f'{extension}')
-
 
 @bot.command(hidden=True)
 @commands.check(am_me)
@@ -89,8 +83,6 @@ async def r(ctx, extension):
     bot.unload_extension(f'cogs.{extension}')
     bot.load_extension(f'cogs.{extension}')
     print("Reloaded " + f'{extension}')
-
-
 # endregion
 
 @bot.command()
@@ -99,20 +91,17 @@ async def purge(ctx, amount: int):
     """Clears a specific amount of messages"""
     await ctx.channel.purge(limit=amount)
 
-
 @bot.command()
 @commands.has_permissions(kick_members=True)
 async def kick(ctx, member: discord.Member, *, reason=None):
     """Kicks a member"""
     await member.kick("{} has been kicked. ")
 
-
 @bot.command()
 @commands.check(am_me)
 async def sudo(ctx):
     """ok"""
     await ctx.channel.send("ok")
-
 
 for filename in os.listdir('./cogs'):
     if filename.endswith('.py'):
