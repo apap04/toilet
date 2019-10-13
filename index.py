@@ -101,7 +101,7 @@ async def kick(ctx, member: discord.Member, *, reason=None):
 @commands.check(am_me)
 async def sudo(ctx):
     """ok"""
-    await ctx.channel.send("ok")
+    await ctx.channel.send("l")
 
 for filename in os.listdir('./cogs'):
     if filename.endswith('.py'):
