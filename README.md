@@ -20,7 +20,7 @@ This is the part everyone wants to get into.... Here's how to run the bot!
 3. `cd` into the bot directory
 4. Do `pip install -r requirements.txt` to install stuff that's needed
 5. Set the token in the code (if you're hosting, leave the token part as is)
-6f. HOSTING ONLY: Set your environment variable for your hosting service to `TOKEN`
-6r. Type `python index.py --log info` to run the bot!
+6. HOSTING ONLY: Set your environment variable for your hosting service to `TOKEN`
+7. Type `python index.py --log info` to run the bot!
 
 There's more stuff you can do with `index.py`. Do `python index.py -h` for additional arguments you can use to make the stuff in the background make more sense.
