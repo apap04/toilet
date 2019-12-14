@@ -93,9 +93,9 @@ async def purge(ctx, amount: int):
 
 @bot.command()
 @commands.has_permissions(kick_members=True)
-async def kick(ctx, member: discord.Member, *, reason=None):
-    """Kicks a member"""
-    await member.kick("{} has been kicked. ")
+bot = commands.Bot(command_prefix='pp', description="the bathroom utility (toilet paper not included)",
+                   owner_id="138056116880932864")
+game = discord.Game("pp(2) help | toilet.apap04.com
 
 @bot.command()
 @commands.check(am_me)
@@ -107,4 +107,4 @@ for filename in os.listdir('./cogs'):
     if filename.endswith('.py'):
         bot.load_extension(f'cogs.{filename[:-3]}')
 
-bot.run('NjE0MTQzODUwODQ3NTM1MTE0.XaH6xw.XffYBzFR-UQeDoM-kz8dWaaW6Ak')
+bot.run('')
