@@ -1,3 +1,5 @@
+#!/usr/bin/env python 
+
 # toilet
 # Copyright (C) 2019 tx3
 
@@ -38,11 +40,6 @@ client = discord.Client()
 bot = commands.Bot(command_prefix='pp', description="the bathroom utility (toilet paper not included)",
                    owner_id="138056116880932864")
 game = discord.Game("pp(2) help | toilet.apap04.com")
-
-@bot.event
-async def on_ready():
-    print("\n" + random.choice(quotes) + "\n")
-
 
 # region
 @bot.event
@@ -91,20 +88,8 @@ async def purge(ctx, amount: int):
     """Clears a specific amount of messages"""
     await ctx.channel.purge(limit=amount)
 
-@bot.command()
-@commands.has_permissions(kick_members=True)
-bot = commands.Bot(command_prefix='pp', description="the bathroom utility (toilet paper not included)",
-                   owner_id="138056116880932864")
-game = discord.Game("pp(2) help | toilet.apap04.com
-
-@bot.command()
-@commands.check(am_me)
-async def sudo(ctx):
-    """ok"""
-    await ctx.channel.send("l")
-
 for filename in os.listdir('./cogs'):
     if filename.endswith('.py'):
         bot.load_extension(f'cogs.{filename[:-3]}')
 
-bot.run('')
+bot.run('NjE0MTQzODUwODQ3NTM1MTE0.XfVNzQ.06kpgBaI8MTmlCNQAVOLAiiCywE')
