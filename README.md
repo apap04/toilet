@@ -15,6 +15,7 @@ If you're planning on hosting the bot yourself, you don't have to use Heroku to 
 ### Running the bot
 
 This is the part everyone wants to get into.... Here's how to run the bot!
+
 1. Download Python 3+
 2. Clone the bot
 3. `cd` into the bot directory

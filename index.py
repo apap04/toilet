@@ -1,4 +1,4 @@
-#!/usr/bin/env python 
+#!/usr/bin/env python3 
 
 # toilet
 # Copyright (C) 2019 tx3
@@ -25,7 +25,7 @@ import random
 import argparse
 
 parser = argparse.ArgumentParser(description='le epic bot everyone will like.')
-parser.add_argument("--log", choices=["debug", "info"], help="specific logging flags")
+parser.add_argument("--log", choices=["debug", "info"], help="specific logging flags. this will change game and token values!!")
 quotes = ["reee", "ready to flush owo", "poop", "poop funny!", "OwO what's this?"]
 
 args = parser.parse_args()
@@ -33,15 +33,24 @@ logger = args.log
 
 if logger == "debug":
     logging.basicConfig(level=logging.DEBUG)
+    token = "NjE0MTQzODUwODQ3NTM1MTE0.Xfaa_g.aNOIs_1aUecAJ6B7XBvPVQ6bTkY"
+    gameval = "pphelp | toilet.apap04.com"
+
 elif logger == "info":
     logging.basicConfig(level=logging.INFO)
+    token = os.environ['TOKEN']
+    gameval = os.environ['IS_PLAYING']
 
 client = discord.Client()
 bot = commands.Bot(command_prefix='pp', description="the bathroom utility (toilet paper not included)",
                    owner_id="138056116880932864")
-game = discord.Game("pp(2) help | toilet.apap04.com")
+game = discord.Game(gameval)
 
 # region
+@bot.event
+async def on_ready():
+    print("\n" + random.choice(quotes) + "\n")
+
 @bot.event
 async def on_command_error(ctx, error):
     if isinstance(error, commands.CommandError):
@@ -57,8 +66,7 @@ async def on_command_error(ctx, error):
 def am_me(ctx):
     return ctx.author.id == 138056116880932864
 
-# utility commands, owner only
-# region
+# utility commands
 @bot.command(hidden=True)
 @commands.check(am_me)
 async def l(ctx, extension):
@@ -80,16 +88,9 @@ async def r(ctx, extension):
     bot.unload_extension(f'cogs.{extension}')
     bot.load_extension(f'cogs.{extension}')
     print("Reloaded " + f'{extension}')
-# endregion
-
-@bot.command()
-@commands.has_permissions(manage_messages=True)
-async def purge(ctx, amount: int):
-    """Clears a specific amount of messages"""
-    await ctx.channel.purge(limit=amount)
 
 for filename in os.listdir('./cogs'):
     if filename.endswith('.py'):
         bot.load_extension(f'cogs.{filename[:-3]}')
 
-bot.run('NjE0MTQzODUwODQ3NTM1MTE0.XfVNzQ.06kpgBaI8MTmlCNQAVOLAiiCywE')
+bot.run(token)

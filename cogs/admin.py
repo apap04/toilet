@@ -15,9 +15,26 @@
 # with this program; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
-# cmd cog for admin stuff !
-
+import discord
 from discord.ext import commands
 
-class Admin(commands.cog):
-    def __init__(self, bot)
+class Admin(commands.Cog):
+    def __init__(self, bot):
+        self.bot = bot
+        self._last_member = None
+
+    @commands.Cog.listener()
+    async def on_member_join(self, member):
+        channel = member.guild.system_channel
+        if channel is not None:
+            await channel.send('FUCK YOU {0.mention}'.format(member))
+
+    @commands.command()
+    @commands.has_permissions(manage_messages=True)
+    async def purge(ctx, amount: int):
+        """Clears a specific amount of messages"""
+        channel = member.guild.system_channel
+        await cxt.channel.purge(limit=amount)
+
+def setup(bot):
+    bot.add_cog(Admin(bot))
