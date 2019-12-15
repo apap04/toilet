@@ -15,14 +15,9 @@
 # with this program; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
-import discord
+# cmd cog for admin stuff !
+
 from discord.ext import commands
 
-class Admin(commands.Cog):
-    def __init__(self, bot):
-        self.bot = bot
-
-    #TODO: redo this shit
-
-def setup(bot):
-    bot.add_cog(Admin(bot))
+class Admin(commands.cog):
+    def __init__(self, bot)
