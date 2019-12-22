@@ -32,7 +32,7 @@ except ImportError:
 
 parser = argparse.ArgumentParser(description='le epic bot everyone will like.')
 parser.add_argument("--log", choices=["debug", "info"], help="specific logging flags. this will change game and token values!!")
-quotes = ["reee", "ready to flush owo", "poop", "poop funny!", "OwO what's this?"]
+quotes = ["reee", "ready to flush owo", "poop", "poop funny!", "OwO what's this?", "h"]
 
 args = parser.parse_args()
 logger = args.log
