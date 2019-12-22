@@ -24,6 +24,12 @@ import logging
 import random
 import argparse
 
+try:
+  import googleclouddebugger
+  googleclouddebugger.enable()
+except ImportError:
+   pass
+
 parser = argparse.ArgumentParser(description='le epic bot everyone will like.')
 parser.add_argument("--log", choices=["debug", "info"], help="specific logging flags. this will change game and token values!!")
 quotes = ["reee", "ready to flush owo", "poop", "poop funny!", "OwO what's this?"]
@@ -72,14 +78,14 @@ def am_me(ctx):
 async def l(ctx, extension):
     """Loads a command"""
     bot.load_extension(f'cogs.{extension}')
-    print("Loaded " + f'{extension}')
+    print("Loaded " + f'{extension}!')
 
 @bot.command(hidden=True)
 @commands.check(am_me)
 async def u(ctx, extension):
     """Unloads a command"""
     bot.unload_extension(f'cogs.{extension}')
-    print("Unloaded " + f'{extension}')
+    print("Unloaded " + f'{extension}!')
 
 @bot.command(hidden=True)
 @commands.check(am_me)
@@ -87,7 +93,7 @@ async def r(ctx, extension):
     """Reloads a command"""
     bot.unload_extension(f'cogs.{extension}')
     bot.load_extension(f'cogs.{extension}')
-    print("Reloaded " + f'{extension}')
+    print("Reloaded " + f'{extension}!')
 
 for filename in os.listdir('./cogs'):
     if filename.endswith('.py'):
