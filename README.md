@@ -8,7 +8,7 @@ Hello! Welcome to the repo of the Toilet bot. This README will house all the dev
 
 ### Hosting
 
-Toilet is hosted on Google Cloud Platform using App Engine. You can use whatever host you want
+Toilet is hosted on Google Cloud Platform using App Engine. You can use whatever host you want but you'll have to configure everything youreslf since some files here are meant for GCP.
 
 ### Running the bot
 
