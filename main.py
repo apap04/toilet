@@ -60,6 +60,8 @@ async def on_command_error(ctx, error):
         await ctx.send("you're missing an argument.")
     if isinstance(error, commands.BotMissingPermissions):
         await ctx.send("i'm missing permissions. nice job.")
+    if isinstance(error, commands.ExtensionNotLoaded):
+        await ctx.send("couldn\'t load extension")
 # endregion
 
 def am_me(ctx):
@@ -72,7 +74,7 @@ async def l(ctx, extension):
     """Loads a command"""
     bot.load_extension(f'cogs.{extension}')
     print("Loaded " + f'{extension}!')
-    ctx.send("loaded" + f'{extension}.')
+    await ctx.send("loaded " + f'{extension}.')
 
 @bot.command(hidden=True)
 @commands.check(am_me)
@@ -80,7 +82,7 @@ async def u(ctx, extension):
     """Unloads a command"""
     bot.unload_extension(f'cogs.{extension}')
     print("Unloaded " + f'{extension}!')
-    ctx.send("unloaded" + f'{extension}.')
+    await ctx.send("unloaded " + f'{extension}.')
 
 @bot.command(hidden=True)
 @commands.check(am_me)
@@ -89,16 +91,17 @@ async def r(ctx, extension):
     bot.unload_extension(f'cogs.{extension}')
     bot.load_extension(f'cogs.{extension}')
     print("Reloaded " + f'{extension}!')
-    ctx.send("reloaded" + f'{extension}.')
+    await ctx.send("reloaded " + f'{extension}.')
 
 @bot.command()
 @commands.has_permissions(kick_members=True)
-async def kick(ctx, member: discord.Member, *, reason=None):
+async def kick(self, member: discord.Member):
     """Kicks a member"""
-    await member.kick("{} has been kicked. ")
+    await self.kick("{} has been kicked. ")
 
 for filename in os.listdir('./cogs'):
     if filename.endswith('.py'):
         bot.load_extension(f'cogs.{filename[:-3]}')
 
 bot.run(os.environ['TOKEN'])
+
