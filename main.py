@@ -23,6 +23,7 @@ import os
 import logging
 import random
 import argparse
+from utils import permissions, default, http, dataIO
 
 # try:
 #   import googleclouddebugger
@@ -64,12 +65,9 @@ async def on_command_error(ctx, error):
         await ctx.send("couldn\'t load extension")
 # endregion
 
-def am_me(ctx):
-    return ctx.author.id == 138056116880932864
-
 # utility commands
 @bot.command(hidden=True)
-@commands.check(am_me)
+@commands.check(permissions.is_owner)
 async def l(ctx, extension):
     """Loads a command"""
     bot.load_extension(f'cogs.{extension}')
@@ -77,7 +75,7 @@ async def l(ctx, extension):
     await ctx.send("loaded " + f'{extension}.')
 
 @bot.command(hidden=True)
-@commands.check(am_me)
+@commands.check(permissions.is_owner)
 async def u(ctx, extension):
     """Unloads a command"""
     bot.unload_extension(f'cogs.{extension}')
@@ -85,7 +83,7 @@ async def u(ctx, extension):
     await ctx.send("unloaded " + f'{extension}.')
 
 @bot.command(hidden=True)
-@commands.check(am_me)
+@commands.check(permissions.is_owner)
 async def r(ctx, extension):
     """Reloads a command"""
     bot.unload_extension(f'cogs.{extension}')
@@ -93,11 +91,7 @@ async def r(ctx, extension):
     print("Reloaded " + f'{extension}!')
     await ctx.send("reloaded " + f'{extension}.')
 
-@bot.command()
-@commands.has_permissions(kick_members=True)
-async def kick(self, member: discord.Member):
-    """Kicks a member"""
-    await self.kick("{} has been kicked. ")
+#endregion
 
 for filename in os.listdir('./cogs'):
     if filename.endswith('.py'):

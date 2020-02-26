@@ -128,3 +128,4 @@ dmypy.json
 ./app.yaml
 #h
 ./config.json
+.idea
