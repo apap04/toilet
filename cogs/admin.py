@@ -52,9 +52,10 @@ class Admin(commands.Cog):
         except discord.Forbidden:
             await ctx.send("nigga don't wanna talk bruh :neutral_face:")
 
-    @commands.group()
+    @commands.group(hidden=True)
     @commands.check(permissions.is_owner)
     async def change(self, ctx):
+	"""group for identifying change"""
         if ctx.invoked_subcommand is None:
             await ctx.send_help(str(ctx.command))
 
@@ -88,7 +89,7 @@ class Admin(commands.Cog):
         except Exception as e:
             await ctx.send(e)
 
-    @commands.command(name="username", hidden=True)
+    @change.command(name="username", hidden=True)
     @commands.check(permissions.is_owner)
     async def change_username(self, ctx, *, name: str):
         """change username ;)"""
@@ -96,7 +97,7 @@ class Admin(commands.Cog):
             await self.bot.user.edit(username=name)
             await ctx.send(f"yea aight now i'm **{name}** :sob:")
         except discord.HTTPException as err:
-            await ctx.send(err)
+            await ctx.send('discord aint like that\n' + err)
 
 def setup(bot):
     bot.add_cog(Admin(bot))
