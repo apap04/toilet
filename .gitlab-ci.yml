@@ -4,7 +4,7 @@ stages:
 deploy:
     stage: deploy
     script:
-        - python main.py --log info
+        - python3 main.py --log info
     environment:
         name: prod
         url: prod.toilet.apap04.com
