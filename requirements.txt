@@ -2,4 +2,3 @@ discord
 discord.py
 timeago
 aiohttp
-google-python-cloud-debugger

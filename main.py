@@ -25,12 +25,6 @@ import random
 import argparse
 from utils import permissions, default, http, dataIO
 
-# try:
-#   import googleclouddebugger
-#   googleclouddebugger.enable()
-# except ImportError:
-#    pass
-
 parser = argparse.ArgumentParser(description='le epic bot everyone will like.')
 parser.add_argument("--log", choices=["debug", "dinfo", "info"], help="specific logging flags. this will change game and token values!!")
 quotes = ["reee", "ready to flush owo", "poop", "poop funny!", "OwO what's this?", "h", "um :flushed:", "The token is 5."]
