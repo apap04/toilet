@@ -17,7 +17,7 @@ class Mod(commands.Cog):
             await member.kick(reason=default.responsible(ctx.author, reason))
             await ctx.send(default.actionmessage("kicked"))
         except Exception as e:
-            await ctx.send("ofc\n```", e, "```")
+            await ctx.send("ofc!\n```", e, "```")
 
 def setup(bot):
     bot.add_cog(Mod(bot))
