@@ -2,5 +2,3 @@
 *.example @apap04
 /doc/ @apap04
 .g* @apap04
-LICENSE legal-gh@apap04.com
-NOTICE legal-gh@apap04.com

@@ -24,6 +24,7 @@ import sys
 import time
 from utils import permissions, default, http, dataIO
 
+
 class Admin(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
@@ -50,12 +51,11 @@ class Admin(commands.Cog):
             await user.send(message)
             await ctx.send(f"messaged **{user_id}**")
         except discord.Forbidden:
-            await ctx.send("nigga don't wanna talk bruh :neutral_face:")
+            await ctx.send("he don't wanna talk :neutral_face:")
 
     @commands.group(hidden=True)
     @commands.check(permissions.is_owner)
     async def change(self, ctx):
-	"""group for identifying change"""
         if ctx.invoked_subcommand is None:
             await ctx.send_help(str(ctx.command))
 
@@ -98,6 +98,7 @@ class Admin(commands.Cog):
             await ctx.send(f"yea aight now i'm **{name}** :sob:")
         except discord.HTTPException as err:
             await ctx.send('discord aint like that\n' + err)
+
 
 def setup(bot):
     bot.add_cog(Admin(bot))

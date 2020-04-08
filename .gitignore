@@ -126,6 +126,6 @@ dmypy.json
 
 # GCP
 ./app.yaml
-#h
-./config.json
+# h
+config.json
 .idea
