@@ -1,8 +1,14 @@
 {
-  "playing": "you.",
-  "playing_type": "watching",
+  "token": "",
+  "join_message": "gm",
   "owners": [
-    // use your ID
+    86477779717066752
   ],
-  "status_type": "online"
+  "prefix": [
+    "!"
+  ],
+  "playing": "YEP COCK",
+  "playing_type": "playing|watching|listening",
+  "status_type": "online|idle|dnd",
+  "version": "2.0.1"
 }

@@ -126,7 +126,8 @@ dmypy.json
 
 # GCP
 ./app.yaml
-# h
+
+# Project-related
 config.json
 .idea
 .vscode
