@@ -19,5 +19,18 @@ class Mod(commands.Cog):
         except Exception as e:
             await ctx.send("ofc!\n```", e, "```")
 
+    @commands.command()
+    @commands.guild_only()
+    @permissions.has_permissions(ban_members=True)
+    async def ban(self, ctx, member: discord.Member, * , reason: str = None):
+        """ Bans user from the server """
+        if await permissions.check_priv(ctx, member):
+            return
+        try:
+            await member.ban(reason=default.responsible(ctx.author, reason))
+            await ctx.send(default.responsible("banned"))
+        except Exception as e:
+            await ctx.send("uh oh\n```", e, "```")
+
 def setup(bot):
     bot.add_cog(Mod(bot))

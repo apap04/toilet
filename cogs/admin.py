@@ -46,7 +46,6 @@ class Admin(commands.Cog):
         user = self.bot.get_user(user_id)
         if not user:
             return await ctx.send(f"can't find mr **{user_id}**")
-
         try:
             await user.send(message)
             await ctx.send(f"messaged **{user_id}**")
