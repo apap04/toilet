@@ -2,6 +2,7 @@ import discord
 from discord.ext import commands
 from utils import permissions, default
 
+
 class Mod(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
@@ -22,7 +23,7 @@ class Mod(commands.Cog):
     @commands.command()
     @commands.guild_only()
     @permissions.has_permissions(ban_members=True)
-    async def ban(self, ctx, member: discord.Member, * , reason: str = None):
+    async def ban(self, ctx, member: discord.Member, *, reason: str = None):
         """ Bans user from the server """
         if await permissions.check_priv(ctx, member):
             return
@@ -31,6 +32,14 @@ class Mod(commands.Cog):
             await ctx.send(default.responsible("banned"))
         except Exception as e:
             await ctx.send("uh oh\n```", e, "```")
+
+    @commands.command()
+    @commands.guild_only()
+    @permissions.has_permissions(manage_messages=True)
+    async def purge(self, ctx, amount: int):
+        """ Delete a specific amount of messages """
+        await ctx.channel.purge(limit=amount + 1)
+
 
 def setup(bot):
     bot.add_cog(Mod(bot))

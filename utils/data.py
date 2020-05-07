@@ -44,4 +44,4 @@ class HelpFormat(DefaultHelpCommand):
                 await destination.send(page)
         except discord.Forbidden:
             destination = self.get_destination(no_pm=True)
-            await destination.send("Couldn't message you. Turn on messages!")
+            await destination.send("Couldn't message you. Turn on DMs!")
