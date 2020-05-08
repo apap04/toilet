@@ -24,5 +24,4 @@ for file in os.listdir("cogs"):
         name = file[:-3]
         bot.load_extension(f"cogs.{name}")
 
-#bot.run(config.token)
-bot.run(os.environ['TOKEN'])
+bot.run(config.token)
