@@ -2,3 +2,4 @@ discord
 discord.py
 timeago
 aiohttp
+psutil
