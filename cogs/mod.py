@@ -2,7 +2,6 @@ import discord
 from discord.ext import commands
 from utils import permissions, default
 
-
 class Mod(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
@@ -36,9 +35,16 @@ class Mod(commands.Cog):
     @commands.command()
     @commands.guild_only()
     @permissions.has_permissions(manage_messages=True)
-    async def purge(self, ctx, amount: int):
-        """ Delete a specific amount of messages """
-        await ctx.channel.purge(limit=amount + 1)
+    async def purge(self, ctx, amount: int, member):
+        """ 
+        Delete a specific amount of messages. Fails if you don't have perms. 
+        """
+        if await permissions.check_priv(ctx, member):
+            return
+        try:
+            await ctx.channel.purge(limit=amount + 1)
+        except discord.Forbidden:
+            await ctx.send("i don\'t have permissions to manage messages.")
 
 
 def setup(bot):

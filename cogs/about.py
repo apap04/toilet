@@ -51,9 +51,11 @@ class About(commands.Cog):
     @commands.command()
     async def source(self, ctx):
         """ Bot source info """
-        embed = discord.Embed(title="the plumbing behind the toilet")
-        embed.add_field(name="Source", value="https://gitlab.com/toilet/toilet")
-        embed.add_field(name="Partly powered by", value="https://github.com/AlexFlipnote/discord_bot.py/tree/master/utils")
+        embed = discord.Embed(
+            title="the plumbing behind the toilet", 
+            description="The cool tech that makes the toilet work!\n")
+        embed.add_field(name="Source", value="https://gitlab.com/toilet/toilet", inline=True)
+        embed.add_field(name="Powered by", value="https://github.com/AlexFlipnote/discord_bot.py/", inline=True)
 
         await ctx.send("the sauce..", embed=embed)
 
