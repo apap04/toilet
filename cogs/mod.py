@@ -35,12 +35,10 @@ class Mod(commands.Cog):
     @commands.command()
     @commands.guild_only()
     @permissions.has_permissions(manage_messages=True)
-    async def purge(self, ctx, amount: int, member):
+    async def purge(self, ctx, amount: int):
         """ 
         Delete a specific amount of messages. Fails if you don't have perms. 
         """
-        if await permissions.check_priv(ctx, member):
-            return
         try:
             await ctx.channel.purge(limit=amount + 1)
         except discord.Forbidden:
