@@ -1,4 +1,5 @@
 import discord
+import logging
 
 from utils import permissions
 from discord.ext.commands import AutoShardedBot, DefaultHelpCommand
@@ -13,6 +14,8 @@ class Bot(AutoShardedBot):
             return
 
         await self.process_commands(msg)
+
+    logging.basicConfig(level=logging.INFO)
 
 
 class HelpFormat(DefaultHelpCommand):
