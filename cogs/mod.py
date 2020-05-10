@@ -42,7 +42,7 @@ class Mod(commands.Cog):
         try:
             await ctx.channel.purge(limit=amount + 1)
         except discord.Forbidden:
-            await ctx.send("i don\'t have permissions to manage messages.")
+            await ctx.send("i don\'t have permissions to flush messages down the toilet.")
 
 
 def setup(bot):
