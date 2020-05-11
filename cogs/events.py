@@ -34,8 +34,8 @@ class Events(commands.Cog):
         elif isinstance(err, errors.CheckFailure):
             pass
 
-        elif isinstance(err, errors.MaxConcurrencyReached):
-            await ctx.send(f"you're using too many commands at once, finish the last one wtf.")
+        # elif isinstance(err, errors.MaxConcurrencyReached):
+        #     await ctx.send(f"you're using too many commands at once, finish the last one wtf.")
 
         elif isinstance(err, errors.CommandOnCooldown):
             await ctx.send(f"you're on cooldown. try again in {err.retry_after:.2f} seconds.")
