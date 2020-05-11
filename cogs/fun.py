@@ -16,6 +16,9 @@
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 import discord
+import lyricsgenius
+import os
+
 from discord.ext import commands
 from utils import default
 
@@ -27,9 +30,19 @@ class Fun(commands.Cog):
 
     @commands.command()
     @commands.guild_only()
-    async def genius(self, ctx):
-        await ctx.send("COCK")
+    async def genius(self, ctx, song: str):
+        """ 
+        [EXPERIMENTAL] Sends you lyrics your way! Unfortunately, you will not get full lyrics due to 
+        discord's message limit. This command is not fully implemented.
+        """
+        genius = lyricsgenius.Genius(os.environ["GENIUS_TOKEN"])
+        song = genius.search_song(f"{song}")
+        embed = discord.Embed(title=song.title + " by " + song.artist, description=f"{song.lyrics}"[0:1024])
+        try:
+            await ctx.send(embed=embed)
+        except discord.Forbidden as e:
+            ctx.send(e)
+
 
 def setup(bot):
     bot.add_cog(Fun(bot))
-    
