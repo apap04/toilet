@@ -19,6 +19,10 @@ import discord
 import lyricsgenius
 import os
 import rule34
+import asyncio
+import aiohttp
+import io
+import random
 
 from discord.ext import commands
 from utils import default
@@ -49,12 +53,14 @@ class Fun(commands.Cog):
     async def hentai(self, ctx, tags):
         """ Get hentai from r34. """
         # lets implement this tomorrow, im tired
-        r34 = rule34.Sync()
-        url = r34.getImageURLS(tags=f"{tags}")
+        loop = asyncio.get_event_loop()
+        r34 = rule34.Rule34(loop=loop)
+        urls = await r34.getImageURLS(tags=f"{tags}", singlePage=True, randomPID=True)
         try:
-            await ctx.send(url)
+            chosen = random.choice(urls)
+            await ctx.send(chosen)
         except:
             pass
-
+        
 def setup(bot):
     bot.add_cog(Fun(bot))
