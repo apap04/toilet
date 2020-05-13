@@ -15,9 +15,9 @@ class Mod(commands.Cog):
             return
         try:
             await member.kick(reason=default.responsible(ctx.author, reason))
-            await ctx.send(default.actionmessage("kicked"))
-        except Exception as e:
-            await ctx.send("ofc!\n```", e, "```")
+            await ctx.send("kicked " + member + " for " + reason)
+        except Exception:
+            pass # the command works but we throw on kick without reason! we won't print because of this...
 
     @commands.command()
     @commands.guild_only()
@@ -28,9 +28,9 @@ class Mod(commands.Cog):
             return
         try:
             await member.ban(reason=default.responsible(ctx.author, reason))
-            await ctx.send(default.responsible("banned"))
-        except Exception as e:
-            await ctx.send("uh oh\n```", e, "```")
+            await ctx.send("banned " + member + " for " + reason)
+        except Exception:
+            pass # the command works but we throw on ban without reason! we won't print because of this...
 
     @commands.command()
     @commands.guild_only()
