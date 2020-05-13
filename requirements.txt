@@ -4,3 +4,4 @@ timeago
 aiohttp
 psutil
 lyricsgenius
+rule34
