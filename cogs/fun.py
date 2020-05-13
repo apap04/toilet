@@ -18,6 +18,7 @@
 import discord
 import lyricsgenius
 import os
+import rule34
 
 from discord.ext import commands
 from utils import default
@@ -42,7 +43,18 @@ class Fun(commands.Cog):
             await ctx.send(embed=embed)
         except discord.Forbidden as e:
             ctx.send(e)
-
+    
+    @commands.command()
+    @commands.guild_only()
+    async def hentai(self, ctx, query):
+        """ Get hentai from r34. """
+        # lets implement this tomorrow, im tired
+        r34 = rule34.Sync()
+        try:
+            r34.getImageURLS(query)
+            await ctx.send(query)
+        except:
+            pass
 
 def setup(bot):
     bot.add_cog(Fun(bot))
