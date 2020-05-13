@@ -18,6 +18,11 @@
 import discord
 import lyricsgenius
 import os
+import rule34
+import asyncio
+import aiohttp
+import io
+import random
 
 from discord.ext import commands
 from utils import default
@@ -42,7 +47,19 @@ class Fun(commands.Cog):
             await ctx.send(embed=embed)
         except discord.Forbidden as e:
             ctx.send(e)
-
-
+    
+    @commands.command()
+    @commands.guild_only()
+    async def hentai(self, ctx, tags):
+        """ Get hentai from r34. """
+        loop = asyncio.get_event_loop()
+        r34 = rule34.Rule34(loop=loop)
+        urls = await r34.getImageURLS(tags=f"{tags}", singlePage=True, randomPID=True)
+        try:
+            chosen = random.choice(urls)
+            await ctx.send(chosen)
+        except:
+            pass
+        
 def setup(bot):
     bot.add_cog(Fun(bot))

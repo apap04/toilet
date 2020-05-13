@@ -51,7 +51,7 @@ def actionmessage(case, mass=False):
     if mass is True:
         output = f"**{case}** the users"
 
-    return f"I managed to {output}"
+    return f"i {output}"
 
 
 async def prettyResults(ctx, filename: str = "Results", resultmsg: str = "Here's the results:", loop=None):
