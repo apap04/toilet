@@ -52,7 +52,6 @@ class Fun(commands.Cog):
     @commands.guild_only()
     async def hentai(self, ctx, tags):
         """ Get hentai from r34. """
-        # lets implement this tomorrow, im tired
         loop = asyncio.get_event_loop()
         r34 = rule34.Rule34(loop=loop)
         urls = await r34.getImageURLS(tags=f"{tags}", singlePage=True, randomPID=True)
