@@ -46,13 +46,13 @@ class Fun(commands.Cog):
     
     @commands.command()
     @commands.guild_only()
-    async def hentai(self, ctx, query):
+    async def hentai(self, ctx, tags):
         """ Get hentai from r34. """
         # lets implement this tomorrow, im tired
         r34 = rule34.Sync()
+        url = r34.getImageURLS(tags=f"{tags}")
         try:
-            r34.getImageURLS(query)
-            await ctx.send(query)
+            await ctx.send(url)
         except:
             pass
 
