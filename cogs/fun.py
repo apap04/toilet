@@ -50,16 +50,18 @@ class Fun(commands.Cog):
     
     @commands.command()
     @commands.guild_only()
-    async def hentai(self, ctx, tags):
-        """ Get hentai from r34. """
+    async def r34(self, ctx, *, tags: str = None):
+        """ Get hentai from rule34.xxx. """
         loop = asyncio.get_event_loop()
         r34 = rule34.Rule34(loop=loop)
-        urls = await r34.getImageURLS(tags=f"{tags}", singlePage=True, randomPID=True)
+        urls = await r34.getImageURLS(tags, singlePage=True, randomPID=True)
         try:
+            print("query " + tags)
             chosen = random.choice(urls)
             await ctx.send(chosen)
-        except:
-            pass
+        except Exception as e:
+            ctx.send("try something else, that didn't work :(")
+            #pass #some strings won't work, we'll just pass
         
 def setup(bot):
     bot.add_cog(Fun(bot))
