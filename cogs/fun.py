@@ -35,18 +35,18 @@ class Fun(commands.Cog):
 
     @commands.command()
     @commands.guild_only()
-    async def genius(self, ctx, song: str):
+    async def genius(self, ctx, *, song: str):
         """ 
         [EXPERIMENTAL] Sends you lyrics your way! Unfortunately, you will not get full lyrics due to 
         discord's message limit. This command is not fully implemented.
         """
         genius = lyricsgenius.Genius(os.environ["GENIUS_TOKEN"])
         song = genius.search_song(f"{song}")
-        embed = discord.Embed(title=song.title + " by " + song.artist, description=f"{song.lyrics}"[0:1024])
+        embed = discord.Embed(title=song.title + " by " + song.artist, description=f"Full lyrics: {song.url}\n\n {song.lyrics}.."[0:997])
         try:
             await ctx.send(embed=embed)
-        except discord.Forbidden as e:
-            ctx.send(e)
+        except:
+            ctx.send("do you have a Genius key in your env? i don't think so...")
     
     @commands.command()
     @commands.guild_only()
