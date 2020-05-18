@@ -16,7 +16,7 @@ To run the bot, you must specify a token. If you know how to do this stuff, you 
 
 #### Starting the bot
 
-1. Copy the example json file and edit the values accoringly.
+1. Copy the example json file and edit the values accordingly.
 2. Install your packages: `python3 -m pip install -r requirements.txt`
 3. OPTIONAL: Enable genius integration:
    1. Make a new API client on [Genius API clients](https://genius.com/api-clients)
