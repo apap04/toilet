@@ -37,8 +37,7 @@ class Fun(commands.Cog):
     @commands.guild_only()
     async def genius(self, ctx, *, song: str):
         """ 
-        [EXPERIMENTAL] Sends you lyrics your way! Unfortunately, you will not get full lyrics due to 
-        discord's message limit. This command is not fully implemented.
+        [WIP] Sends you lyrics your way!
         """
         genius = lyricsgenius.Genius(os.environ["GENIUS_TOKEN"])
         song = genius.search_song(f"{song}")
