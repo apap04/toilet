@@ -49,6 +49,7 @@ class Fun(commands.Cog):
     
     @commands.command()
     @commands.guild_only()
+    @commands.is_nsfw()
     async def r34(self, ctx, *, tags: str = None):
         """ Get hentai from rule34.xxx. """
         loop = asyncio.get_event_loop()
