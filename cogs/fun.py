@@ -49,7 +49,6 @@ class Fun(commands.Cog):
     
     @commands.command()
     @commands.guild_only()
-    @commands.is_nsfw()
     async def r34(self, ctx, *, tags: str = None):
         """ Get hentai from rule34.xxx. """
         loop = asyncio.get_event_loop()
@@ -59,8 +58,9 @@ class Fun(commands.Cog):
             print("query " + tags)
             chosen = random.choice(urls)
             await ctx.send(chosen)
-        except Exception:
-            ctx.send("are we in an nsfw channel?")
+        except Exception as e:
+            ctx.send("try something else, that didn't work :(")
+            #pass #some strings won't work, we'll just pass
         
 def setup(bot):
     bot.add_cog(Fun(bot))
