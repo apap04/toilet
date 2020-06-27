@@ -17,7 +17,6 @@ class Bot(AutoShardedBot):
 
     logging.basicConfig(level=logging.INFO)
 
-
 class HelpFormat(DefaultHelpCommand):
     def get_destination(self, no_pm: bool = False):
         if no_pm:
@@ -35,12 +34,6 @@ class HelpFormat(DefaultHelpCommand):
         await self.send_pages(no_pm=True)
 
     async def send_pages(self, no_pm: bool = False):
-        try:
-            if permissions.can_react(self.context):
-                await self.context.message.add_reaction(chr(0x2709))
-        except discord.Forbidden:
-            pass
-
         try:
             destination = self.get_destination(no_pm=no_pm)
             for page in self.paginator.pages:
