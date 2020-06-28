@@ -37,13 +37,14 @@ class Fun(commands.Cog):
         """ 
         [WIP] Sends you lyrics your way!
         """
-        genius = lyricsgenius.Genius(os.environ["GENIUS_TOKEN"])
-        song = genius.search_song(f"{song}")
-        embed = discord.Embed(title=song.title + " by " + song.artist, description=f"Full lyrics: {song.url}\n\n {song.lyrics}.."[0:997])
         try:
+            genius = lyricsgenius.Genius(os.environ["GENIUS_TOKEN"])
+            song = genius.search_song(f"{song}")
+            embed = discord.Embed(title=song.title + " by " + song.artist, 
+                                  description=f"Full lyrics: {song.url}\n\n {song.lyrics}.."[0:997])
             await ctx.send(embed=embed)
-        except:
-            ctx.send("do you have a Genius key in your env? i don't think so...")
+        except KeyError:
+            await ctx.send("i couldn't find a Genius key in my environment...")
     
     @commands.command()
     @commands.guild_only()
