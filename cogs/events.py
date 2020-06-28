@@ -55,19 +55,13 @@ class Events(commands.Cog):
         else:
             await to_send.send(self.config.join_message)
 
-    @commands.Cog.listener()
-    async def on_command(self, ctx):
-        try:
-            print(f"{ctx.guild.name} > {ctx.author} > {ctx.message.clean_content}")
-        except AttributeError:
-            print(f"Private message > {ctx.author} > {ctx.message.clean_content}")
 
     @commands.Cog.listener()
     async def on_message(self, ctx):
         try:
             print(f"{ctx.guild.name} > {ctx.author} > {ctx.clean_content}")
         except AttributeError:
-            pass # someone dms bot :(
+            print(f"Private message > {ctx.author} > {ctx.clean_content}")
 
     @commands.Cog.listener()
     async def on_ready(self):
