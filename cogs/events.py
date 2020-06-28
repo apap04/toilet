@@ -63,6 +63,13 @@ class Events(commands.Cog):
             print(f"Private message > {ctx.author} > {ctx.message.clean_content}")
 
     @commands.Cog.listener()
+    async def on_message(self, ctx):
+        try:
+            print(f"{ctx.guild.name} > {ctx.author} > {ctx.clean_content}")
+        except AttributeError:
+            pass # someone dms bot :(
+
+    @commands.Cog.listener()
     async def on_ready(self):
         """ The function that actiavtes when boot was completed """
         if not hasattr(self.bot, 'uptime'):
@@ -91,7 +98,6 @@ class Events(commands.Cog):
             activity=discord.Activity(type=playing_type, name=self.config.playing),
             status=status_type
         )
-
 
 def setup(bot):
     bot.add_cog(Events(bot))
