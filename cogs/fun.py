@@ -55,11 +55,10 @@ class Fun(commands.Cog):
         r34 = rule34.Rule34(loop=loop)
         urls = await r34.getImageURLS(tags, singlePage=True, randomPID=True)
         try:
-            print("query " + tags)
             chosen = random.choice(urls)
             await ctx.send(chosen)
         except Exception as e:
-            ctx.send("try something else, that didn't work :(")
+            await ctx.send("try something else, that didn't work :(")
             #pass #some strings won't work, we'll just pass
         
 def setup(bot):
