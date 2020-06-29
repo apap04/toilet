@@ -59,7 +59,7 @@ class Events(commands.Cog):
     @commands.Cog.listener()
     async def on_message(self, ctx):
         try:
-            print(f"{ctx.guild.name} > {ctx.author} > {ctx.clean_content}")
+            print(f"{ctx.guild.name} > #{ctx.channel.name} > {ctx.author} > {ctx.clean_content}")
         except AttributeError:
             print(f"Private message > {ctx.author} > {ctx.clean_content}")
 
