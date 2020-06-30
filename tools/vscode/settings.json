@@ -1,0 +1,8 @@
+{
+    "editor.tabSize": 2,
+    // keep lines nice and short
+    "editor.rulers": [116],
+    "files.eol": "\n",
+    // Trim tailing whitespace on save.
+    "files.trimTrailingWhitespace": true,
+}
