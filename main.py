@@ -15,13 +15,15 @@
 # with this program; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
+
 import os
 import random
 
 from utils import default
 from utils.data import Bot, HelpFormat
 
-quotes = ["reee", "ready to flush owo", "poop", "poop funny!", "OwO what's this?", "h", "um :flushed:", "The token is 5."]
+quotes = ["reee", "ready to flush owo", "poop", "poop funny!",
+        "OwO what's this?", "h", "um :flushed:", "The token is 5."]
 
 config = default.get("config.json")
 print("---", random.choice(quotes), "---")

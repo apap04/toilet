@@ -46,7 +46,7 @@ class Events(commands.Cog):
                     f"Both error and command will be ignored."
                 )
 
-            await ctx.send(f"oops. big oops.\n{error}\nthis shouldn't happen. do `poo support` and tell <@403308385539194880> about this...")
+            await ctx.send(f"oops. big oops.\n{error}\nthis shouldn't happen. do `poo support` so we can help...")
 
         elif isinstance(err, errors.CheckFailure):
             pass
@@ -66,7 +66,8 @@ class Events(commands.Cog):
             return
 
         try:
-            to_send = sorted([chan for chan in guild.channels if chan.permissions_for(guild.me).send_messages and isinstance(chan, discord.TextChannel)], key=lambda x: x.position)[0]
+            to_send = sorted([chan for chan in guild.channels if chan.permissions_for(guild.me).send_messages
+                and isinstance(chan, discord.TextChannel)], key=lambda x: x.position)[0]
         except IndexError:
             pass
         else:
