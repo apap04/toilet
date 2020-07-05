@@ -66,6 +66,9 @@ class Fun(commands.Cog):
     @commands.command(name="xkcd")
     @commands.guild_only()
     async def get_lastest_xkcd(self, ctx):
+        """
+        Get the latest xkcd comic.
+        """
         try:
             with urllib.request.urlopen("https://xkcd.com/info.0.json") as url:
                 data = json.loads(url.read().decode())
