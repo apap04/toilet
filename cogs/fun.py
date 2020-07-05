@@ -59,7 +59,7 @@ class Fun(commands.Cog):
         try:
             chosen = random.choice(urls)
             await ctx.send(chosen)
-        except Exception as e:
+        except Exception:
             await ctx.send("try something else, that didn't work :(")
             #pass #some strings won't work, we'll just pass
 
