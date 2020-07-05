@@ -14,18 +14,19 @@ Toilet is hosted on Google Cloud Platform using App Engine. You can use whatever
 
 To run the bot, you must specify a token. If you know how to do this stuff, you can just hardcode a token. But if you're running a public repository, you might have to specify a token locally so you don't have any hassle with leaking tokens.
 
-#### Linux instuctions
+#### Starting the bot
 
-1. Define TOKEN
+1. Copy the example json file and edit the values accordingly.
+2. Install your packages: `python3 -m pip install -r requirements.txt`
+3. OPTIONAL: Enable genius integration:
+   1. Make a new API client on [Genius API clients](https://genius.com/api-clients)
+   2. On Linux, do `$ export GENIUS_TOKEN=<your token>`
+   3. On Windows, do `$ set GENIUS_TOKEN=<your token>`
+
+4. Run the bot!
 
 ```bash
-$ export TOKEN=<token>
-```
-
-2. Run the bot
-
-```bash
-$ python3 main.py --log info
+$ python3 main.py
 ```
 
 ### Contributing

@@ -23,6 +23,8 @@ import asyncio
 import aiohttp
 import io
 import random
+import urllib
+import json
 
 from discord.ext import commands
 from utils import default
@@ -30,36 +32,47 @@ from utils import default
 class Fun(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-        self.config = default.get("config.json")
-        self._last_result = None
 
     @commands.command()
     @commands.guild_only()
-    async def genius(self, ctx, song: str):
-        """ 
-        [EXPERIMENTAL] Sends you lyrics your way! Unfortunately, you will not get full lyrics due to 
-        discord's message limit. This command is not fully implemented.
+    async def genius(self, ctx, *, song: str):
         """
-        genius = lyricsgenius.Genius(os.environ["GENIUS_TOKEN"])
-        song = genius.search_song(f"{song}")
-        embed = discord.Embed(title=song.title + " by " + song.artist, description=f"{song.lyrics}"[0:1024])
+        [WIP] Sends you lyrics your way!
+        """
         try:
+            genius = lyricsgenius.Genius(os.environ["GENIUS_TOKEN"])
+            song = genius.search_song(f"{song}")
+            embed = discord.Embed(title=song.title + " by " + song.artist,
+                                  description=f"Full lyrics: {song.url}\n\n {song.lyrics}.."[0:997])
             await ctx.send(embed=embed)
-        except discord.Forbidden as e:
-            ctx.send(e)
-    
+        except KeyError:
+            await ctx.send("i couldn't find a Genius key in my environment...")
+
     @commands.command()
     @commands.guild_only()
-    async def hentai(self, ctx, tags):
-        """ Get hentai from r34. """
+    @commands.is_nsfw()
+    async def r34(self, ctx, *, tags: str = None):
+        """ Get hentai from rule34.xxx. """
         loop = asyncio.get_event_loop()
         r34 = rule34.Rule34(loop=loop)
-        urls = await r34.getImageURLS(tags=f"{tags}", singlePage=True, randomPID=True)
+        urls = await r34.getImageURLS(tags, singlePage=True, randomPID=True)
         try:
             chosen = random.choice(urls)
             await ctx.send(chosen)
-        except:
-            pass
-        
+        except Exception as e:
+            await ctx.send("try something else, that didn't work :(")
+            #pass #some strings won't work, we'll just pass
+
+    @commands.command(name="xkcd")
+    @commands.guild_only()
+    async def get_lastest_xkcd(self, ctx):
+        try:
+            with urllib.request.urlopen("https://xkcd.com/info.0.json") as url:
+                data = json.loads(url.read().decode())
+                # turn this into an embed!
+                await ctx.send(f"**{data['safe_title']}**\n\"*{data['alt']}*\"\n{data['img']}")
+        except Exception as e:
+            await ctx.send(e)
+
 def setup(bot):
     bot.add_cog(Fun(bot))

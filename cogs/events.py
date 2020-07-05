@@ -1,3 +1,20 @@
+# toilet
+# Copyright (C) 2019 tx3
+
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License along
+# with this program; if not, write to the Free Software Foundation, Inc.,
+# 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+
 import discord
 import psutil
 import os
@@ -29,7 +46,7 @@ class Events(commands.Cog):
                     f"Both error and command will be ignored."
                 )
 
-            await ctx.send(f"oops. big oops.\n{error}\nthis shouldn't happen. do `poo support` and tell <@403308385539194880> about this...")
+            await ctx.send(f"oops. big oops.\n{error}\nthis shouldn't happen. do `poo support` so we can help...")
 
         elif isinstance(err, errors.CheckFailure):
             pass
@@ -49,18 +66,20 @@ class Events(commands.Cog):
             return
 
         try:
-            to_send = sorted([chan for chan in guild.channels if chan.permissions_for(guild.me).send_messages and isinstance(chan, discord.TextChannel)], key=lambda x: x.position)[0]
+            to_send = sorted([chan for chan in guild.channels if chan.permissions_for(guild.me).send_messages
+                and isinstance(chan, discord.TextChannel)], key=lambda x: x.position)[0]
         except IndexError:
             pass
         else:
             await to_send.send(self.config.join_message)
 
+
     @commands.Cog.listener()
-    async def on_command(self, ctx):
+    async def on_message(self, ctx):
         try:
-            print(f"{ctx.guild.name} > {ctx.author} > {ctx.message.clean_content}")
+            print(f"{ctx.guild.name} > #{ctx.channel.name} > {ctx.author} > {ctx.clean_content}")
         except AttributeError:
-            print(f"Private message > {ctx.author} > {ctx.message.clean_content}")
+            print(f"Private message > {ctx.author} > {ctx.clean_content}")
 
     @commands.Cog.listener()
     async def on_ready(self):
@@ -91,7 +110,6 @@ class Events(commands.Cog):
             activity=discord.Activity(type=playing_type, name=self.config.playing),
             status=status_type
         )
-
 
 def setup(bot):
     bot.add_cog(Events(bot))
