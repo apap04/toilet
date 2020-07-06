@@ -65,29 +65,23 @@ class Fun(commands.Cog):
 
     @commands.command(name="xkcd")
     @commands.guild_only()
-    async def get_lastest_xkcd(self, ctx):
+    async def get_lastest_xkcd(self, ctx, comic: int = None):
         """
-        Get the latest xkcd comic.
-        """
-        try:
-            with urllib.request.urlopen("https://xkcd.com/info.0.json") as url:
-                data = json.loads(url.read().decode())
-                # turn this into an embed!
-                await ctx.send(f"**{data['safe_title']}**\n*\"{data['alt']}\"*\n{data['img']}")
-        except Exception as e:
-            await ctx.send(e)
-
-    @commands.command(name="axkcd")
-    @commands.guild_only()
-    async def get_xkcd(self, ctx, comic: int):
-        """
-        Get the a specific xkcd comic.
+        Get the latest (or any) xkcd comic!
         """
         try:
-            with urllib.request.urlopen(f"https://xkcd.com/{comic}/info.0.json") as url:
-                data = json.loads(url.read().decode())
-                # turn this into an embed!
-                await ctx.send(f"**{data['safe_title']}**\n*\"{data['alt']}\"*\n{data['img']}")
+            if comic == None:
+                with urllib.request.urlopen("https://xkcd.com/info.0.json") as url:
+                    data = json.loads(url.read().decode())
+                    result = f"**{data['safe_title']}**\n*\"{data['alt']}\"*\n{data['img']}"
+                    # turn this into an embed!
+                    await ctx.send(result)
+            else:
+                with urllib.request.urlopen(f"https://xkcd.com/{comic}/info.0.json") as url:
+                    data = json.loads(url.read().decode())
+                    result = f"**{data['safe_title']}**\n*\"{data['alt']}\"*\n{data['img']}"
+                    # turn this into an embed!
+                    await ctx.send(result)
         except Exception as e:
             await ctx.send(e)
 
