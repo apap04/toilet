@@ -95,7 +95,7 @@ class Fun(commands.Cog):
         # TODO: Do not allow template pages or user pages to be indexed.
         # TODO(greek): fix Expecting value: line 1 column 1 (char 0)
         try:
-            with urllib.request.urlopen("https://en.wikipedia.org/w/api.php?action=parse&page={page}&prop=wikitext&formatversion=2!") as url:
+            with urllib.request.urlopen(f"https://en.wikipedia.org/w/api.php?action=parse&page={page}&prop=wikitext&formatversion=2!") as url:
                 data = json.loads(url.read().decode())
                 result = f"{data['content']}"
                 # turn this into an embed!
