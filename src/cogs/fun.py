@@ -72,7 +72,7 @@ class Fun(commands.Cog):
         except Exception as e:
             await ctx.send(e)
 
-    @commands.command(name="wiki")
+    @commands.command(name="wiki", hidden=True)
     @commands.check(permissions.is_owner)
     async def get_wikipedia_page(self, ctx, page: str):
         """
