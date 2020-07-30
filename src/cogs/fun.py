@@ -29,7 +29,7 @@ import json
 import mwparserfromhell
 
 from discord.ext import commands
-from utils import default
+from utils import default, permissions
 
 class Fun(commands.Cog):
     def __init__(self, bot):
@@ -73,6 +73,7 @@ class Fun(commands.Cog):
             await ctx.send(e)
 
     @commands.command(name="wiki")
+    @commands.check(permissions.is_owner)
     async def get_wikipedia_page(self, ctx, page: str):
         """
         Get the contents of a Wikipedia page.
