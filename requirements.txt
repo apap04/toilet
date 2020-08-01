@@ -4,3 +4,4 @@ aiohttp
 psutil
 lyricsgenius
 rule34
+mwparserfromhell
