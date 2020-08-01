@@ -28,7 +28,7 @@ from utils import permissions, default, http, dataIO
 class Admin(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-        self.config = default.get("src\\config.json")
+        self.config = default.get("src/config.json")
         self._last_result = None
 
     @commands.command(hidden=True)
