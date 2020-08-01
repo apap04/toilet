@@ -27,18 +27,5 @@ class NSFW(commands.Cog):
             await ctx.send("try something else, that didn't work :(")
             # pass #some strings won't work, we'll just pass
 
-    @commands.command(name="phub")
-    @commands.guild_only()
-    @commands.is_nsfw()
-    async def get_porn(self, ctx, *, query: str = None):
-        try:
-            keywords = ["fortnite"]
-            client = PornHub(keywords)
-            for videos in client.getVideos(1, random.randint(1, 10)):
-                await ctx.send(videos["url"])
-        except Exception as e:
-            print(e)
-
-
 def setup(bot):
     bot.add_cog(NSFW(bot))
