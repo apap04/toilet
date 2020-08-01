@@ -1,5 +1,4 @@
-discord
-discord.py
+discord.py>=1.3.4
 timeago
 aiohttp
 psutil

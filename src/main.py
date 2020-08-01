@@ -25,7 +25,7 @@ from utils.data import Bot, HelpFormat
 quotes = ["reee", "ready to flush owo", "poop", "poop funny!",
         "OwO what's this?", "h", "um :flushed:", "The token is 5."]
 
-config = default.get("config.json")
+config = default.get("src\\config.json")
 print("---", random.choice(quotes), "---")
 
 bot = Bot(
@@ -35,7 +35,7 @@ bot = Bot(
     help_command=HelpFormat()
 )
 
-for file in os.listdir("cogs"):
+for file in os.listdir("src\\cogs"):
     if file.endswith(".py"):
         name = file[:-3]
         bot.load_extension(f"cogs.{name}")

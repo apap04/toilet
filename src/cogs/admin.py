@@ -28,7 +28,7 @@ from utils import permissions, default, http, dataIO
 class Admin(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-        self.config = default.get("config.json")
+        self.config = default.get("src\\config.json")
         self._last_result = None
 
     @commands.command(hidden=True)
@@ -111,7 +111,7 @@ class Admin(commands.Cog):
                 activity=discord.Activity(type=playing_type, name=playing),
                 status=status_type
             )
-            dataIO.change_value("config.json", "playing", playing)
+            dataIO.change_value("src\\config.json", "playing", playing)
             await ctx.send("changed gamer status to " + f'**{playing}**.')
         except discord.InvalidArgument as err:
             await ctx.send(err)

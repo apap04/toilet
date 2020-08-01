@@ -26,7 +26,7 @@ from datetime import datetime
 class About(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-        self.config = default.get("config.json")
+        self.config = default.get("src\\config.json")
         self.process = psutil.Process(os.getpid())
 
     @commands.command()
@@ -69,7 +69,7 @@ class About(commands.Cog):
     async def source(self, ctx):
         """ Bot source info """
         embed = discord.Embed(
-            title="the plumbing behind the toilet", 
+            title="the plumbing behind the toilet",
             description="The cool tech that makes the toilet work!\n")
         embed.add_field(name="Source", value="https://gitlab.com/toilet/toilet", inline=True)
         embed.add_field(name="Powered by", value="https://github.com/AlexFlipnote/discord_bot.py/", inline=True)

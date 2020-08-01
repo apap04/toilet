@@ -3,7 +3,7 @@ import discord
 from utils import default
 from discord.ext import commands
 
-owners = default.get("config.json").owners
+owners = default.get("src\\config.json").owners
 
 
 def is_owner(ctx):
