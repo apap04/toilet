@@ -25,7 +25,7 @@ from utils.data import Bot, HelpFormat
 quotes = ["reee", "ready to flush owo", "poop", "poop funny!",
         "OwO what's this?", "h", "um :flushed:", "The token is 5."]
 
-config = default.get("src\\config.json")
+config = default.get("src/config.json")
 print("---", random.choice(quotes), "---")
 
 bot = Bot(
