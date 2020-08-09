@@ -31,10 +31,16 @@ class Mod(commands.Cog):
         if await permissions.check_priv(ctx, member):
             return
         try:
+            if reason == None:
+                await member.send(f"you were kicked from **{ctx.guild}** for no reason.")
+                await ctx.send(f"kicked {member.mention} for no reason.")
+            else:
+                await member.send(f"you were kicked from **{ctx.guild}** for {reason}.")
+                await ctx.send(f"kicked {member.mention} for {reason}.")
             await member.kick(reason=default.responsible(ctx.author, reason))
-            await ctx.send("kicked " + member + " for " + reason)
-        except Exception:
-            pass # the command works but we throw on kick without reason! we won't print because of this...
+
+        except Exception as e:
+            print(e) # the command works but we throw on kick without reason! we won't print because of this...
 
     @commands.command()
     @commands.guild_only()
@@ -44,8 +50,13 @@ class Mod(commands.Cog):
         if await permissions.check_priv(ctx, member):
             return
         try:
+            if reason == None:
+                await member.send(f"you were banned from **{ctx.guild}** for no reason.")
+                await ctx.send(f"banned {member.mention} for no reason.")
+            else:
+                await member.send(f"you were banned from **{ctx.guild}** for {reason}.")
+                await ctx.send(f"banned {member.mention} for {reason}.")
             await member.ban(reason=default.responsible(ctx.author, reason))
-            await ctx.send("banned " + member + " for " + reason)
         except Exception:
             pass # the command works but we throw on ban without reason! we won't print because of this...
 
