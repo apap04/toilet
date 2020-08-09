@@ -22,7 +22,6 @@ from discord.ext import commands
 from utils import default
 from datetime import datetime
 
-
 class About(commands.Cog):
     def __init__(self, bot):
         self.bot = bot

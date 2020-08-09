@@ -24,7 +24,6 @@ import sys
 import time
 from utils import permissions, default, http, dataIO
 
-
 class Admin(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
