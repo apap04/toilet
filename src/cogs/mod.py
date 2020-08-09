@@ -28,9 +28,9 @@ class Mod(commands.Cog):
     @permissions.has_permissions(kick_members=True)
     async def kick(self, ctx, member: discord.Member, *, reason: str = None):
         """ Kicks a user from the current server. """
-        if await permissions.check_priv(ctx, member):
-            return
         try:
+            if await permissions.check_priv(ctx, member):
+                return
             if reason == None:
                 await member.send(f"you were kicked from **{ctx.guild}** for no reason.")
                 await ctx.send(f"kicked {member.mention} for no reason.")
@@ -38,18 +38,20 @@ class Mod(commands.Cog):
                 await member.send(f"you were kicked from **{ctx.guild}** for {reason}.")
                 await ctx.send(f"kicked {member.mention} for {reason}.")
             await member.kick(reason=default.responsible(ctx.author, reason))
-
-        except Exception as e:
-            print(e) # the command works but we throw on kick without reason! we won't print because of this...
+        except Exception:
+            pass
 
     @commands.command()
     @commands.guild_only()
     @permissions.has_permissions(ban_members=True)
     async def ban(self, ctx, member: discord.Member, *, reason: str = None):
         """ Bans user from the server """
-        if await permissions.check_priv(ctx, member):
-            return
         try:
+            if await permissions.check_priv(ctx, member):
+                return
+            if discord.Forbidden:
+                await ctx.send("i don't have perms...")
+                return
             if reason == None:
                 await member.send(f"you were banned from **{ctx.guild}** for no reason.")
                 await ctx.send(f"banned {member.mention} for no reason.")
@@ -58,7 +60,7 @@ class Mod(commands.Cog):
                 await ctx.send(f"banned {member.mention} for {reason}.")
             await member.ban(reason=default.responsible(ctx.author, reason))
         except Exception:
-            pass # the command works but we throw on ban without reason! we won't print because of this...
+            pass
 
     @commands.command()
     @commands.guild_only()

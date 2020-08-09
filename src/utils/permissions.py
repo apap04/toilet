@@ -43,7 +43,7 @@ async def check_priv(ctx, member):
             else:
                 pass
         if member.id == ctx.guild.owner.id:
-            return await ctx.send(f"the owner has more power to {ctx.command.name} you, n")
+            return await ctx.send(f"the owner has more power to {ctx.command.name} you")
         if ctx.author.top_role == member.top_role:
             return await ctx.send(f"can't {ctx.command.name} someone who has the same permissions as you")
         if ctx.author.top_role < member.top_role:
