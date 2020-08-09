@@ -31,6 +31,9 @@ class Mod(commands.Cog):
         try:
             if await permissions.check_priv(ctx, member):
                 return
+            if discord.Forbidden:
+                await ctx.send("i don't have perms...")
+                return
             if reason == None:
                 await member.send(f"you were kicked from **{ctx.guild}** for no reason.")
                 await ctx.send(f"kicked {member.mention} for no reason.")
