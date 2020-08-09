@@ -4,7 +4,6 @@ import asyncio
 import aiohttp
 import random
 
-from utils.pornhub.pornhub import PornHub
 from discord.ext import commands
 
 class NSFW(commands.Cog):
