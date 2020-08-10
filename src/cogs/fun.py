@@ -90,6 +90,18 @@ class Fun(commands.Cog):
         except Exception as e:
             await ctx.send(e)
 
+    @commands.command(name="user")
+    async def get_user_info(self, ctx, member: discord.Member):
+        try:
+            embed = discord.Embed(title=f"User info for {member.display_name}")
+            embed.add_field(name="Join date", value=f"{member.joined_at}"[0:10])
+            embed.add_field(name="Creation date", value=f"{member.created_at}"[0:10])
+
+            embed.color("#fff")
+            await ctx.send(embed=embed)
+        except Exception as e:
+            await ctx.send(default.traceback_maker(e))
+
 
 def setup(bot):
     bot.add_cog(Fun(bot))
