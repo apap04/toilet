@@ -5,3 +5,4 @@ psutil
 lyricsgenius
 rule34
 mwparserfromhell
+gitdb2==2.0.6
