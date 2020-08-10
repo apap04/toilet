@@ -93,14 +93,15 @@ class Fun(commands.Cog):
     @commands.command(name="user")
     async def get_user_info(self, ctx, member: discord.Member):
         try:
-            embed = discord.Embed(title=f"User info for {member.display_name}")
+            embed = discord.Embed(colour=discord.Colour(0xff55ff), description=f"{member.mention}")
+            embed.set_author(name=f"{member.display_name}#{member.discriminator}", icon_url=member.avatar_url)
+            embed.set_thumbnail(url=member.avatar_url)
             embed.add_field(name="Join date", value=f"{member.joined_at}"[0:10])
             embed.add_field(name="Creation date", value=f"{member.created_at}"[0:10])
-
-            embed.color("#fff")
+            embed.add_field(name="Roles", value=f"{discord.Role.mention}", inline=True)
             await ctx.send(embed=embed)
         except Exception as e:
-            await ctx.send(default.traceback_maker(e))
+            await ctx.send(e)
 
 
 def setup(bot):
