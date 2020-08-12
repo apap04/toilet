@@ -1,14 +1,15 @@
 {
-  "token": "",
-  "join_message": "yo what's up",
-  "owners": [
-    138056116880932864
-  ],
-  "prefix": [
-    "!"
-  ],
-  "playing": "YEP COCK",
-  "playing_type": "playing|watching|listening",
-  "status_type": "online|idle|dnd",
-  "version": "2.0.1"
+    "token": "token here",
+    "join_message": "yo what's up",
+    "owners": [
+        138056116880932864,
+        403308385539194880
+    ],
+    "prefix": [
+        "poo "
+    ],
+    "playing": "poo help",
+    "playing_type": "playing",
+    "status_type": "online",
+    "version": "1.0.2"
 }
