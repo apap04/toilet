@@ -18,15 +18,8 @@
 import discord
 import lyricsgenius
 import os
-import rule34
-import asyncio
-import aiohttp
-import io
-import random
-import requests
 import urllib
 import json
-import mwparserfromhell
 
 from discord.ext import commands
 from utils import default, permissions
