@@ -92,6 +92,9 @@ class Fun(commands.Cog):
 
     @commands.command(name="user")
     async def get_user_info(self, ctx, member: discord.Member):
+        """
+        Get information for a specific user.
+        """
         try:
             embed = discord.Embed(colour=discord.Colour(0xff55ff), description=f"{member.mention}")
             embed.set_author(name=str(member), icon_url=member.avatar_url)
