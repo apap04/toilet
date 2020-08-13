@@ -18,7 +18,6 @@
 import discord
 import psutil
 import os
-import git
 from discord.ext import commands
 from utils import default
 from datetime import datetime
@@ -42,8 +41,6 @@ class About(commands.Cog):
         """ About the bot """
         ramUsage = self.process.memory_full_info().rss / 1024**2
         avgmembers = round(len(self.bot.users) / len(self.bot.guilds))
-        repo = git.Repo("./")
-        branch = repo.active_branch
 
         embedColour = discord.Embed.Empty
         if hasattr(ctx, 'guild') and ctx.guild is not None:
@@ -64,7 +61,6 @@ class About(commands.Cog):
         embed.add_field(name="Commands loaded", value=len(
             [x.name for x in self.bot.commands]), inline=True)
         embed.add_field(name="RAM usage", value=f"{ramUsage:.2f} MB", inline=True)
-        embed.add_field(name="Branch", value=f"{branch.name} (" + str(branch.commit)[:7] + ")", inline=True)
 
         await ctx.send(content=f"about **{ctx.bot.user}** | **{self.config.version}**", embed=embed)
 
