@@ -20,8 +20,10 @@ import lyricsgenius
 import os
 import urllib
 import json
+import asyncio
 
 from discord.ext import commands
+from discord.ext.commands import errors
 from utils import default, permissions
 
 class Fun(commands.Cog):
@@ -45,7 +47,7 @@ class Fun(commands.Cog):
 
     @commands.command(name="xkcd")
     @commands.guild_only()
-    async def get_lastest_xkcd(self, ctx, comic: int = None):
+    async def _xkcd(self, ctx, comic: int = None):
         """
         Get the latest (or any) xkcd comic!
         """
@@ -62,8 +64,13 @@ class Fun(commands.Cog):
                     result = f"**{data['safe_title']}**\n*\"{data['alt']}\"*\n{data['img']}"
                     # turn this into an embed!
                     await ctx.send(result)
-        except Exception as e:
-            await ctx.send(e)
+        except Exception:
+            pass
+
+    @_xkcd.error
+    async def xkcd_handler(self, ctx, error):
+        if isinstance(error, commands.BadArgument):
+            await ctx.send("i need a number")
 
     @commands.command(name="wiki", hidden=True)
     @commands.check(permissions.is_owner)
@@ -84,12 +91,14 @@ class Fun(commands.Cog):
             await ctx.send(e)
 
     @commands.command(name="user")
-    async def get_user_info(self, ctx, member: discord.Member):
+    async def get_user_info(self, ctx, member: discord.Member = None):
         """
         Get information for a specific user.
         """
         try:
-            embed = discord.Embed(colour=discord.Colour(0xff55ff), description=f"{member.mention}")
+            if member is None:
+                member = ctx.author
+            embed = discord.Embed(colour=member.color, description=f"{member.mention}")
             embed.set_author(name=str(member), icon_url=member.avatar_url)
             embed.set_thumbnail(url=member.avatar_url)
             embed.add_field(name="Join date", value=f"{member.joined_at}"[0:10])
