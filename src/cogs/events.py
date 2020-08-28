@@ -32,11 +32,7 @@ class Events(commands.Cog):
 
     @commands.Cog.listener()
     async def on_command_error(self, ctx, err):
-        if isinstance(err, errors.MissingRequiredArgument) or isinstance(err, errors.BadArgument):
-            helper = str(ctx.invoked_subcommand) if ctx.invoked_subcommand else str(ctx.command)
-            await ctx.send_help(helper)
-
-        elif isinstance(err, errors.CommandInvokeError):
+        if isinstance(err, errors.CommandInvokeError):
             error = default.traceback_maker(err.original)
 
             if "2000 or fewer" in str(err) and len(ctx.message.clean_content) > 1900:
@@ -86,10 +82,8 @@ class Events(commands.Cog):
         if not hasattr(self.bot, 'uptime'):
             self.bot.uptime = datetime.utcnow()
 
-        # Indicate that the bot has successfully booted up
         print(f'Ready: {self.bot.user} | Servers: {len(self.bot.guilds)}')
 
-        # Check if user desires to have something other than online
         if self.config.status_type == "idle":
             status_type = discord.Status.idle
         elif self.config.status_type == "dnd":
@@ -97,7 +91,6 @@ class Events(commands.Cog):
         else:
             status_type = discord.Status.online
 
-        # Check if user desires to have a different type of playing status
         if self.config.playing_type == "listening":
             playing_type = 2
         elif self.config.playing_type == "watching":
