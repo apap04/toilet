@@ -21,6 +21,7 @@ import os
 import urllib
 import json
 import asyncio
+import wikipedia
 
 from discord.ext import commands
 from discord.ext.commands import errors
@@ -74,19 +75,19 @@ class Fun(commands.Cog):
 
     @commands.command(name="wiki", hidden=True)
     @commands.check(permissions.is_owner)
-    async def get_wikipedia_page(self, ctx, page: str):
+    async def get_wikipedia_page(self, ctx, *, query: str):
         """
         Get the contents of a Wikipedia page.
         """
         # TODO: Do not allow template pages or user pages to be indexed.
         # TODO(greek): fix Expecting value: line 1 column 1 (char 0)
         try:
-            api_url = f"https://en.wikipedia.org/w/api.php?action=parse&page={page}&prop=wikitext&formatversion=2"
-            with urllib.request.urlopen(api_url) as url:
-                data = json.loads(url.read().decode())
-                result = f"{data}"
-                # turn this into an embed!
-                await ctx.send(result)
+            result = wikipedia.search(query)
+            summary = wikipedia.summary(result.summary)
+            embed = discord.Embed(title=result.title)
+
+            ctx.send(embed=embed)
+
         except Exception as e:
             await ctx.send(e)
 
