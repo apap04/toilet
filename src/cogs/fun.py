@@ -104,7 +104,7 @@ class Fun(commands.Cog):
             embed.set_thumbnail(url=member.avatar_url)
             embed.add_field(name="Join date", value=f"{member.joined_at}"[0:10])
             embed.add_field(name="Creation date", value=f"{member.created_at}"[0:10])
-            # embed.add_field(name="Roles", value=str(discord.Member.roles), inline=True)
+            embed.add_field(name="Roles", value=", ".join([r.mention for r in member.roles]), inline=False)
             embed.set_footer(text="ID: " + str(member.id))
             await ctx.send(embed=embed)
         except Exception as e:

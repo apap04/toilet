@@ -87,7 +87,7 @@ class Admin(commands.Cog):
         if ctx.invoked_subcommand is None:
             await ctx.send_help(str(ctx.command))
 
-    @change.command(name="playing", hidden=True)
+    @change.command(name="playing")
     @commands.check(permissions.is_owner)
     async def change_playing(self, ctx, *, playing: str):
         """playing stats chang8r for whatever reason"""
@@ -117,7 +117,7 @@ class Admin(commands.Cog):
         except Exception as e:
             await ctx.send(e)
 
-    @change.command(name="username", hidden=True)
+    @change.command(name="username")
     @commands.check(permissions.is_owner)
     async def change_username(self, ctx, *, name: str):
         """change username ;)"""

@@ -47,7 +47,7 @@ async def check_priv(ctx, member):
         if ctx.author.top_role == member.top_role:
             return await ctx.send(f"can't {ctx.command.name} someone who has the same permissions as you")
         if ctx.author.top_role < member.top_role:
-            return await ctx.send(f"can't {ctx.command.name} yer higher-ups")
+            return
     except Exception:
         pass
 

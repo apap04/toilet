@@ -31,18 +31,16 @@ class Mod(commands.Cog):
         try:
             if await permissions.check_priv(ctx, member):
                 return
-            if discord.Forbidden:
-                await ctx.send("i don't have perms...")
-                return
             if reason == None:
                 await member.send(f"you were kicked from **{ctx.guild}** for no reason.")
                 await ctx.send(f"kicked {member.mention} for no reason.")
             else:
-                await member.send(f"you were kicked from **{ctx.guild}** for {reason}.")
-                await ctx.send(f"kicked {member.mention} for {reason}.")
+                await member.send(f"you were kicked from **{ctx.guild}** for \"{reason}\".")
+                await ctx.send(f"kicked {member.mention} for \"{reason}\".")
             await member.kick(reason=default.responsible(ctx.author, reason))
-        except Exception:
-            pass
+        except discord.Forbidden:
+            await ctx.send("i don't have perms...")
+            return
 
     @commands.command()
     @commands.guild_only()
@@ -52,18 +50,16 @@ class Mod(commands.Cog):
         try:
             if await permissions.check_priv(ctx, member):
                 return
-            if discord.Forbidden:
-                await ctx.send("i don't have perms...")
-                return
             if reason == None:
                 await member.send(f"you were banned from **{ctx.guild}** for no reason.")
                 await ctx.send(f"banned {member.mention} for no reason.")
             else:
-                await member.send(f"you were banned from **{ctx.guild}** for {reason}.")
-                await ctx.send(f"banned {member.mention} for {reason}.")
+                await member.send(f"you were banned from **{ctx.guild}** for \"{reason}\".")
+                await ctx.send(f"banned {member.mention} for \"{reason}\".")
             await member.ban(reason=default.responsible(ctx.author, reason))
-        except Exception:
-            pass
+        except discord.Forbidden:
+            await ctx.send("i don't have perms...")
+            return
 
     @commands.command()
     @commands.guild_only()
@@ -76,6 +72,37 @@ class Mod(commands.Cog):
             await ctx.channel.purge(limit=amount + 1)
         except discord.Forbidden:
             await ctx.send("i don\'t have permissions to flush messages down the toilet.")
+
+    @commands.group()
+    @commands.guild_only()
+    @permissions.has_permissions(manage_roles=True)
+    async def role(self, ctx, member: discord.Member):
+        """
+        Do something with the roles.
+        """
+        if ctx.invoked_subcommand is None:
+            await ctx.send_help(str(ctx.command))
+
+    @role.command(name="add")
+    @commands.guild_only()
+    @permissions.has_permissions(manage_roles=True)
+    async def create_role(self, ctx, *, role: str, color: discord.Color = None):
+        """
+        Create a new role, the quick way.
+        """
+        try:
+            if await permissions.check_priv(ctx, member):
+                return
+            await ctx.guild.create_role(name=role)
+            await ctx.send(f"created role {role}")
+        except discord.Forbidden:
+            await ctx.send("i can't make roles")
+
+    @role.command(name="give")
+    @commands.guild_only()
+    #
+    async def give_role(parameter_list):
+        pass
 
 
 def setup(bot):
