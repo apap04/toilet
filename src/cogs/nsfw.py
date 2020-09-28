@@ -23,24 +23,28 @@ import random
 
 from discord.ext import commands
 
+
 class NSFW(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command()
-    @commands.guild_only()
-    @commands.is_nsfw()
-    async def r34(self, ctx, *, tags: str):
-        """ Get hentai from rule34.xxx. """
-        loop = asyncio.get_event_loop()
-        r34 = rule34.Rule34(loop=loop)
-        urls = await r34.getImageURLS(tags, singlePage=True, randomPID=True)
-        try:
-            chosen = random.choice(urls)
-            await ctx.send(chosen)
-        except Exception:
-            await ctx.send("try something else, that didn't work :(")
-            # pass #some strings won't work, we'll just pass
+    # @commands.command()
+    # @commands.guild_only()
+    # @commands.is_nsfw()
+    # async def r34(self, ctx, *, tags: str):
+    #     """ Get hentai from rule34.xxx. """
+    #     loop = asyncio.get_event_loop()
+    #     r34 = rule34.Rule34(loop=loop)
+    #     try:
+    #         urls = await r34.getImages(tags, singlePage=True, randomPID=True)
+    #         chosen = random.choice([urls])
+    #         print(chosen)
+    #         await ctx.send(chosen)
+    #     except Exception as e:
+    #         print(e)
+    #         await ctx.send("try something else, that didn't work :(")
+    #         # pass #some strings won't work, we'll just pass
+
 
 def setup(bot):
     bot.add_cog(NSFW(bot))
