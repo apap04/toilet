@@ -110,7 +110,7 @@ class Admin(commands.Cog):
                 activity=discord.Activity(type=playing_type, name=playing),
                 status=status_type
             )
-            dataIO.change_value("src\\config.json", "playing", playing)
+            dataIO.change_value(self.config, "playing", playing)
             await ctx.send("changed gamer status to " + f'**{playing}**.')
         except discord.InvalidArgument as err:
             await ctx.send(err)
@@ -124,8 +124,9 @@ class Admin(commands.Cog):
         try:
             await self.bot.user.edit(username=name)
             await ctx.send(f"yea aight now i'm **{name}** :sob:")
-        except discord.HTTPException as err:
-            await ctx.send('discord aint like that\n' + err)
+        except discord.HTTPException as e:
+            await ctx.send("too many people might have this name, try something else.")
+            print(f"exception at {e}")
 
 
 def setup(bot):

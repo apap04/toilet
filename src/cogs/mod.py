@@ -19,24 +19,25 @@ import discord
 from discord.ext import commands
 from utils import permissions, default
 
+
 class Mod(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
     @commands.command()
     @commands.guild_only()
-    @permissions.has_permissions(kick_members=True)
+    @permissions.has_permissions(kick_members=True, administrator=True)
     async def kick(self, ctx, member: discord.Member, *, reason: str = None):
-        """ Kicks a user from the current server. """
+        """
+        Kicks a user from the current server.
+        """
         try:
             if await permissions.check_priv(ctx, member):
                 return
             if reason == None:
-                await member.send(f"you were kicked from **{ctx.guild}** for no reason.")
                 await ctx.send(f"kicked {member.mention} for no reason.")
             else:
-                await member.send(f"you were kicked from **{ctx.guild}** for \"{reason}\".")
-                await ctx.send(f"kicked {member.mention} for \"{reason}\".")
+                await ctx.send(f'kicked {member.mention} for "{reason}".')
             await member.kick(reason=default.responsible(ctx.author, reason))
         except discord.Forbidden:
             await ctx.send("i don't have perms...")
@@ -44,18 +45,18 @@ class Mod(commands.Cog):
 
     @commands.command()
     @commands.guild_only()
-    @permissions.has_permissions(ban_members=True)
+    @permissions.has_permissions(ban_members=True, administrator=True)
     async def ban(self, ctx, member: discord.Member, *, reason: str = None):
-        """ Bans user from the server """
+        """
+        Bans user from the server
+        """
         try:
             if await permissions.check_priv(ctx, member):
                 return
             if reason == None:
-                await member.send(f"you were banned from **{ctx.guild}** for no reason.")
                 await ctx.send(f"banned {member.mention} for no reason.")
             else:
-                await member.send(f"you were banned from **{ctx.guild}** for \"{reason}\".")
-                await ctx.send(f"banned {member.mention} for \"{reason}\".")
+                await ctx.send(f'banned {member.mention} for "{reason}".')
             await member.ban(reason=default.responsible(ctx.author, reason))
         except discord.Forbidden:
             await ctx.send("i don't have perms...")
@@ -71,7 +72,9 @@ class Mod(commands.Cog):
         try:
             await ctx.channel.purge(limit=amount + 1)
         except discord.Forbidden:
-            await ctx.send("i don\'t have permissions to flush messages down the toilet.")
+            await ctx.send(
+                "i don't have permissions to flush messages down the toilet."
+            )
 
     @commands.group()
     @commands.guild_only()
