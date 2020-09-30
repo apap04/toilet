@@ -26,7 +26,7 @@ class Mod(commands.Cog):
 
     @commands.command()
     @commands.guild_only()
-    @permissions.has_permissions(kick_members=True, administrator=True)
+    @permissions.has_permissions(kick_members=True)
     async def kick(self, ctx, member: discord.Member, *, reason: str = None):
         """
         Kicks a user from the current server.
@@ -34,18 +34,19 @@ class Mod(commands.Cog):
         try:
             if await permissions.check_priv(ctx, member):
                 return
-            if reason == None:
-                await ctx.send(f"kicked {member.mention} for no reason.")
-            else:
-                await ctx.send(f'kicked {member.mention} for "{reason}".')
+            await ctx.send(
+                f"kicked {str(member)} for no reason."
+                if reason is None
+                else f'kicked {str(member)} for "{reason}".'
+            )
             await member.kick(reason=default.responsible(ctx.author, reason))
-        except discord.Forbidden:
-            await ctx.send("i don't have perms...")
-            return
+        except Exception as e:
+            await ctx.send("nevermind, i don't have permissions.")
+            print(e)
 
     @commands.command()
     @commands.guild_only()
-    @permissions.has_permissions(ban_members=True, administrator=True)
+    @permissions.has_permissions(ban_members=True)
     async def ban(self, ctx, member: discord.Member, *, reason: str = None):
         """
         Bans user from the server
@@ -53,14 +54,15 @@ class Mod(commands.Cog):
         try:
             if await permissions.check_priv(ctx, member):
                 return
-            if reason == None:
-                await ctx.send(f"banned {member.mention} for no reason.")
-            else:
-                await ctx.send(f'banned {member.mention} for "{reason}".')
+            await ctx.send(
+                f"banned {str(member)} for no reason."
+                if reason is None
+                else f'banned {str(member)} for "{reason}".'
+            )
             await member.ban(reason=default.responsible(ctx.author, reason))
-        except discord.Forbidden:
-            await ctx.send("i don't have perms...")
-            return
+        except Exception as e:
+            await ctx.send("nevermind, i don't have permissions.")
+            print(e)
 
     @commands.command()
     @commands.guild_only()
